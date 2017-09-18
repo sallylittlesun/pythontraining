@@ -4,6 +4,7 @@
 import os
 import  getopt
 import sys
+import random
 from PIL import Image,ImageDraw, ImageFont,ImageFilter
 
 ds1={'width':80,'height':80,'file':''}
@@ -53,6 +54,21 @@ def d000():
     drawObject.text((wdraw,hdraw),'4',font=Font1)
     del drawObject
     im.save('numbim.jpeg','jpeg')
+
+def d0001():
+    l = []
+    for i in range(1,201):
+        l.append(random.randint(1,999))
+    print l 
+
+def d0004():
+    words,sentenses = 0 , 0
+    f = open('en_file.txt')
+    for line in f.readlines():
+        sentenses += 1
+        words += len(line.split())
+    print words,sentenses
+
 if __name__=='__main__':
-    d000()
+    d0004()
 
