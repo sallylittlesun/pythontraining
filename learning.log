@@ -4,3 +4,9 @@
 写d0004的时候，在网上看到好几种方法，有一个之前没有接触的模块，collections，常用的类型有:Counter,deque,defaultdict,OrderedDict,namedtuple。看用途Counter deque可能作用会大一点，Counter是用于计数的，计数后返回值是字典，key是元素，value是元素个数。deque主要是可以从两边对数据进行增加删除的操作。
 
 还有用re模块进行findall正则匹配查找单词，暂时还没有仔细看。
+
+
+9.20
+d0005，有2个问题 一个是对目标目录的遍历，一个是对图像的处理。
+目录遍历我用的是python自带的函数，感觉可能用shell命令会更快一点，现在写的循环数量大的时候会很慢。
+图像处理，一开始想用Image模块的resize函数，但是这个函数不是按比例缩放的，不是很合适。

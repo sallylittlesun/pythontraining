@@ -69,6 +69,30 @@ def d0004():
         words += len(line.split())
     print words,sentenses
 
+def d0005(path):
+    hight,width = 1136,640
+    for dirpath,dirnames,filenames in os.walk(path):
+        for f in filenames:
+            if f.endswith('.jpg') or f.endswith('.jpeg'):
+                fpath = os.path.join(dirpath,f)
+                print fpath
+                im = Image.open(fpath)
+                resizeim = im.resize((width,hight),Image.ANTIALIAS)
+                cname = f.split('.')[0]+'_re'+f.split('.')[1]
+                resizeim.save('%s'%(cname),'jpeg')
+                del resizeim
+                fw,fh = im.size
+#                if fh < hight and fw > width:
+#                    cw = fh*width/hight
+#                    ch = fh
+#                elif fh > hight:
+#                    ch = hight
+#                    cw = 
+                
+            
+    
+
 if __name__=='__main__':
-    d0004()
+    d0005('/home/repo/pythontraining')
+
 
