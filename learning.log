@@ -10,3 +10,13 @@
 d0005，有2个问题 一个是对目标目录的遍历，一个是对图像的处理。
 目录遍历我用的是python自带的函数，感觉可能用shell命令会更快一点，现在写的循环数量大的时候会很慢。
 图像处理，一开始想用Image模块的resize函数，但是这个函数不是按比例缩放的，不是很合适。
+
+
+9.25
+今天主要是学习熟悉了一下用python解析html，网上看可用的库比较多，选择了Beautiful Soup,文档https://www.crummy.com/software/BeautifulSoup/bs4/doc.zh/，安装方式：apt-get install Python-bs4，这个库的功能还是比较多的。
+把html网址转化成源码，urllib2库，
+page =urllib2.urlopen(url)
+print page.read()
+使用bs的时候，会出现报错UnicodeEncodeError: 'ascii' codec can't encode character u'\xf8' in position 7318: ordinal not in range(128)
+因为python默认编码是ascii，所以在脚本开始把编码改成utf-8即可。
+

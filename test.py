@@ -6,7 +6,12 @@ import  getopt
 import sys
 import random
 from PIL import Image,ImageDraw, ImageFont,ImageFilter
+import urllib2
+from bs4 import BeautifulSoup
 
+print sys.getdefaultencoding()
+reload(sys)
+sys.setdefaultencoding('utf8')  
 ds1={'width':80,'height':80,'file':''}
 
 def usage():
@@ -82,17 +87,32 @@ def d0005(path):
                 resizeim.save('%s'%(cname),'jpeg')
                 del resizeim
                 fw,fh = im.size
-#                if fh < hight and fw > width:
-#                    cw = fh*width/hight
-#                    ch = fh
-#                elif fh > hight:
-#                    ch = hight
-#                    cw = 
-                
-            
-    
+               
+
+def readurl(url):
+    page = urllib2.urlopen(url)
+#    f = open('source','w')
+#    f.writelines(page)
+#    f.close()
+    return page
+
+def d0008(url):
+    page = readurl(url)
+    soup = BeautifulSoup(page)    
+    f = open('text','w')
+    text = soup.get_text()
+    f.write(text)
+    f.close()
+
+def d0009(url):
+    links = []
+    page = readurl(url)
+    soup = BeautifulSoup(page)
+    for link in soup.find_all('a'):
+        links.append(link.get('href'))
+    print links
 
 if __name__=='__main__':
-    d0005('/home/repo/pythontraining')
+     d0009('https://github.com/Yixiaohan/show-me-the-code')
 
 
