@@ -20,3 +20,7 @@ print page.read()
 使用bs的时候，会出现报错UnicodeEncodeError: 'ascii' codec can't encode character u'\xf8' in position 7318: ordinal not in range(128)
 因为python默认编码是ascii，所以在脚本开始把编码改成utf-8即可。
 
+10.9
+今天主要练习的是PIL模块的例子，注意新建图片时，图片大小设置先宽后高。
+随机生成数字字母，可以用ascii码对应序号，再用chr()函数生成。
+

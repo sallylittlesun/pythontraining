@@ -112,7 +112,32 @@ def d0009(url):
         links.append(link.get('href'))
     print links
 
+def ranchr():
+    return chr(random.randint(65,90))
+
+def rancolor1():
+    return (random.randint(64,255),random.randint(64,255),random.randint(64,255))
+
+def rancolor2():
+    return (random.randint(32,127),random.randint(32,127),random.randint(32,127))
+
+def d0010():
+    width = 240
+    height = 60
+    image = Image.new('RGB',(width,height),(255,255,255))
+    font = ImageFont.truetype('/usr/share/cups/fonts/FreeMono.ttf',42)
+    draw = ImageDraw.Draw(image)
+    for x in range(width):
+        for y in  range(height):
+            draw.point((x,y),fill=rancolor1())
+    for i in range(4):
+        draw.text((60 * i + 10, 10), ranchr(), font=font, fill=rancolor2())
+    image = image.filter(ImageFilter.BLUR)
+    image.save('randchr.jpg','jpeg')
+
 if __name__=='__main__':
-     d0009('https://github.com/Yixiaohan/show-me-the-code')
+#     d0009('https://github.com/Yixiaohan/show-me-the-code')
+     d0010()
+
 
 
