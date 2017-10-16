@@ -147,10 +147,20 @@ def d0011(word):
     else:
         print 'human right!'
 
+def d0012(word):
+    filist =map(lambda i: i.strip('\n').decode('utf-8'), open('filtered_words.txt').readlines())
+    print filist
+    print word
+    new = word
+    for i in filist:
+        if i in word:
+            new = new.replace(i,'*'*len(i))
+    print new
+
 if __name__=='__main__':
 #     d0009('https://github.com/Yixiaohan/show-me-the-code')
     word = raw_input('please input your words:')
-    d0011(word)
+    d0012(word)
 
 
 
