@@ -24,3 +24,7 @@ print page.read()
 今天主要练习的是PIL模块的例子，注意新建图片时，图片大小设置先宽后高。
 随机生成数字字母，可以用ascii码对应序号，再用chr()函数生成。
 
+
+10.10
+简单练习了一下敏感词的查找，网上有一些用python 进行敏感词查找的例子，DFA算法，这个没有怎么看懂，还要再研究一下，map函数跟lamba还需要练习一下。
+http://blog.csdn.net/huangxiongbiao/article/category/2116035/2  这个是别人写的程序，可以参考学习。

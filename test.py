@@ -135,9 +135,22 @@ def d0010():
     image = image.filter(ImageFilter.BLUR)
     image.save('randchr.jpg','jpeg')
 
+def d0011(word):
+    filist = []
+    f = open('filtered_words.txt')
+    wlist = f.readlines()
+    for i in wlist:
+        a = i.strip('\n')
+        filist.append(a)
+    if word in filist:
+        print 'Freedom!'
+    else:
+        print 'human right!'
+
 if __name__=='__main__':
 #     d0009('https://github.com/Yixiaohan/show-me-the-code')
-     d0010()
+    word = raw_input('please input your words:')
+    d0011(word)
 
 
 
