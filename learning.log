@@ -31,3 +31,10 @@ http://blog.csdn.net/huangxiongbiao/article/category/2116035/2  这个是别人�
 
 10.16
 敏感词替换，使用替换的时候会遇到编码问题导致的字数统计问题，提取敏感词的时候要decord成utf-8的格式，不然后面替换时会用ascaii码的字数替换，一次循环之后可能会出现新的组成敏感词，这个问题要考虑。形成新的字符串时注意，定义时要先把新字符串=输入字符，然后再替换，不然会一直只是最后一个敏感词的替换。
+
+
+10.17
+今天主要练习了一下python表格应用跟正则表达式的应用，re的应用还需要好好练习一下，http://www.cnblogs.com/huxi/archive/2010/07/04/1771073.html
+python表格处理使用的是xlwt，这个要注意一下，在linux环境下，要加encoding=utf-8，否则中文会报错。
+http://www.cnblogs.com/liez/p/5380925.html#3409968
+
