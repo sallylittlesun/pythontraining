@@ -38,3 +38,5 @@ http://blog.csdn.net/huangxiongbiao/article/category/2116035/2  这个是别人�
 python表格处理使用的是xlwt，这个要注意一下，在linux环境下，要加encoding=utf-8，否则中文会报错。
 http://www.cnblogs.com/liez/p/5380925.html#3409968
 
+10.18
+今天还是练习了一下正则表达式的使用，并且尝试了一下更加精简的代码结构，注意：写入表格时先行后列，处理数据的时候要通过定义一个变量，循环来遍历表格。

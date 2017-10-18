@@ -25,6 +25,20 @@ def d0014():
             j +=1
     ftxt.close()
     f.save('student.xls')
+    f.close()
+
+def d0015():
+    f = xlwt.Workbook(encoding = 'utf-8')
+    citysht = f.add_sheet('city')
+    pattern = re.compile(r'"(\d+)" : "(.*?)"')
+    lines = pattern.findall(open('city.txt').read())
+    print lines
+    i = 0
+    for x in lines:
+        for j in range(len(x)):
+            citysht.write(i,j,lines[i][j])
+        i += 1
+    f.save('city.xls')
 
 if __name__=='__main__':
-    d0014()
+    d0015()
