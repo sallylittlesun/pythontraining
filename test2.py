@@ -7,6 +7,7 @@ import xlrd
 import re
 import sys
 import xml.dom.minidom as dom
+import json
 
 reload(sys)
 sys.setdefaultencoding('utf8')
@@ -17,15 +18,24 @@ def d0014():
     studentsht = f.add_sheet('student')
     pattern = re.compile(r'"(\d+)":\["(.*?)",(\d+),(\d+),(\d+)]')
     ftxt = open('student.txt')
-    j = 0
-    for line in ftxt.readlines():
-        print line
-        print pattern.findall(line)
-        choose = pattern.findall(line)
-        if choose:
-            for i in range(len(choose[0])):
-                studentsht.write(j,i,choose[0][i]) 
-            j +=1
+    S = eval(ftxt.read())
+    print S
+    for i in range(len(S)):  #行
+        a = S.items()[i]
+        print a
+        j = 0 #列
+        studentsht.write(i,j,a[j])
+        for j in range(len(a[1])):
+            studentsht.write(i,j+1,a[1][j])
+#    j = 0
+#    for line in ftxt.readlines():
+#        print line
+#        print pattern.findall(line)
+#        choose = pattern.findall(line)
+#        if choose:
+#            for i in range(len(choose[0])):
+#                studentsht.write(j,i,choose[0][i]) 
+#            j +=1
     ftxt.close()
     f.save('student.xls')
 
@@ -57,13 +67,25 @@ def d0016():
 
 def get_data(xls):
     data = xlrd.open_workbook(xls)
-    table = data.sheet_by_name('student')
+    table = data.sheet_by_index(0)
     dic = {}
     for i in range(table.nrows):
-        print str(table.row_values(i)[1].decode('utf-8'))
-#        content = content +'    '+ table.row_values(i)[0] +' : '+ str(table.row_values(i)[1:]) ',\n'
-        
-        dic[table.row_values(i)[0]]=table.row_values(i)[1:]
+        print table.row_values(i)[1:]
+        ldata = table.row_values(i)
+        d=int(ldata[0])
+        ldic = []
+        for j in range(len(ldata[1:])):
+            ldic.append(ldata[j+1].encode('utf-8'))
+        dic[d]=ldic
+    print json.dumps(dic,encoding='utf-8',ensure_ascii=False)
+    return dic
+
+def get_data2(xls):
+    data = xlrd.open_workbook(xls)
+    table = data.sheet_by_index(0)
+    dic = {}
+    for i in range(table.nrows):
+        dic[str(i+1)]=table.row_values(i)[1:]
     print dic
     return dic
 
@@ -73,13 +95,15 @@ def d0017(xls):
     student = doc.createElement('student')
     doc.appendChild(root)
     root.appendChild(student)
-    a = '学生信息表\n "id" : [名字, 数学, 语文, 英文]'
+    a = '学生信息表\n        "id" : [名字, 数学, 语文, 英文]'
     comment = doc.createComment(a)
     student.appendChild(comment)
-    content = get_data(xls)
+    content = get_data2(xls)
     student.appendChild(doc.createTextNode(str(content)))
-    f = open('student.xml','w')
-    f.write(doc.toprettyxml(encoding = 'utf-8'))
+    with open('student.xml', 'w') as f:
+    #f.write(doc.toprettyxml(encoding = 'utf-8'))
+        doc.writexml(f,indent='', addindent='\t', newl='\n',encoding = 'utf-8')
 
 if __name__=='__main__':
+    d0014()
     d0017('student.xls')

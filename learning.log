@@ -46,4 +46,6 @@ http://www.cnblogs.com/liez/p/5380925.html#3409968
 
 
 10.26
-今天写了一下表格和xml之间的转换，有几个问题，1：中文无法识别，报错Non-ASCII character '\xe5'  but no encoding declared，网上找的在文件开头重置编码格式的不起作用，之后我把encoding删除重新写了一遍可以了；2：读取出来的文件中文显示有问题，中文需要用decode utf-8一下。
+今天写了一下表格和xml之间的转换，有几个问题，1：中文无法识别，报错Non-ASCII character '\xe5'  but no encoding declared，网上找的在文件开头重置编码格式的不起作用，之后我把encoding删除重新写了一遍可以了；2：读取出来的文件中文显示有问题，用python生成的表格读取数据都是unicode编码，所以数字和中文都需要再处理。列表和字典里的中文直接打印出来都会变成utf-8格式。可以通过逐个打印，或者字典使用print json.dumps(dict, ensure_ascii=False, encoding='UTF-8'),但是写入xml文件的中文还是utf-8格式。
+14-16对固定格式文本的处理，可以用eval()函数，这个会简单方便很多。用eval()获取的数据格式跟之前用正则式匹配的不一样，数字变成了float型，但是中文显示还是有问题，不知道是不是因为linux系统的原因。
+
