@@ -7,6 +7,7 @@ import xlrd
 import re
 import sys
 import xml.dom.minidom as dom
+import xml.etree.ElementTree as ET
 import json
 
 reload(sys)
@@ -50,6 +51,18 @@ def d0015():
         for j in range(len(x)):
             citysht.write(i,j,lines[i][j])
         i += 1
+    f.save('city.xls')
+
+def d0015_2():
+    f = xlwt.Workbook(encoding='utf-8')
+    citysht = f.add_sheet('city')
+    data = eval(open('city.txt').read())
+    print data
+    for i in range(len(data)):
+        print data.items()[i]
+        a = data.items()[i]
+        for j in range(len(a)):
+            citysht.write(i,j,a[j])
     f.save('city.xls')
 
 def d0016():
@@ -104,6 +117,53 @@ def d0017(xls):
     #f.write(doc.toprettyxml(encoding = 'utf-8'))
         doc.writexml(f,indent='', addindent='\t', newl='\n',encoding = 'utf-8')
 
+def get_c(xls):
+    data = xlrd.open_workbook(xls)
+    table = data.sheet_by_index(0)
+    d ={}
+    for i in range(table.nrows):    
+        d[str(i+1)]=table.row_values(i)[-1]
+    print d
+    return d
+
+
+def d0018(xls):
+    doc = dom.Document()
+    root = doc.createElement('root')
+    student = doc.createElement('student')
+    doc.appendChild(root)
+    root.appendChild(student)
+    data = get_c(xls)
+    comment = doc.createComment('城市信息')
+    student.appendChild(comment)
+    student.appendChild(doc.createTextNode(str(data)))
+    with open('city.xml','w') as f:
+        doc.writexml(f,indent='', addindent='\t', newl='\n',encoding = 'utf-8')
+
+def createxml(r,c,comment,data,filename):
+    doc = dom.Document()
+    root = doc.createElement(r)
+    child = doc.createElement(c)
+    doc.appendChild(root)
+    root.appendChild(child)
+    comm = doc.createComment(comment)
+    child.appendChild(comm)
+    child.appendChild(doc.createTextNode(str(data)))
+    with open(filename,'w') as f:
+        doc.writexml(f,indent='', addindent='\t', newl='\n',encoding = 'utf-8')
+
+def get_n(xls):
+    doc=xlrd.open_workbook(xls)
+    table = doc.sheet_by_index(0)
+    data = []
+    for i in range(table.nrows):
+        data.append(table.row_values(i))
+    print data
+    return data
+
+def d0019(xls):
+    data = get_n(xls)
+    createxml('root','number','数字信息',data,'number.xml')
+
 if __name__=='__main__':
-    d0014()
-    d0017('student.xls')
+    d0019('number.xls')
